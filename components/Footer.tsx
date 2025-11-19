@@ -41,7 +41,7 @@ export default function Footer() {
             <h3 className="text-2xl font-heading font-bold mb-4 text-gold">
               {branding.siteTitle}
             </h3>
-            <p className="text-base text-white/60 font-body leading-relaxed">
+            <p className="text-lg md:text-xl text-white/60 font-body leading-relaxed">
               A sanctuary where luxury meets nature. Experience the tranquility
               of the forest in unparalleled comfort.
             </p>
@@ -54,7 +54,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h4 className="text-base font-semibold mb-5 font-body uppercase tracking-wider text-gold">
+            <h4 className="text-lg font-semibold mb-5 font-body uppercase tracking-wider text-gold">
               Explore
             </h4>
             <ul className="space-y-3">
@@ -62,7 +62,7 @@ export default function Footer() {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-base text-white/60 hover:text-gold transition-colors duration-200 font-body"
+                    className="text-lg text-white/60 hover:text-gold transition-colors duration-200 font-body"
                   >
                     {link.name}
                   </a>
@@ -78,7 +78,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="text-base font-semibold mb-5 font-body uppercase tracking-wider text-gold">
+            <h4 className="text-lg font-semibold mb-5 font-body uppercase tracking-wider text-gold">
               Information
             </h4>
             <ul className="space-y-3">
@@ -86,7 +86,7 @@ export default function Footer() {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-base text-white/60 hover:text-gold transition-colors duration-200 font-body"
+                    className="text-lg text-white/60 hover:text-gold transition-colors duration-200 font-body"
                   >
                     {link.name}
                   </a>
@@ -102,7 +102,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h4 className="text-base font-semibold mb-5 font-body uppercase tracking-wider text-gold">
+            <h4 className="text-lg font-semibold mb-5 font-body uppercase tracking-wider text-gold">
               Connect
             </h4>
             <ul className="space-y-3">
@@ -110,7 +110,7 @@ export default function Footer() {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="text-base text-white/60 hover:text-gold transition-colors duration-200 font-body flex items-center gap-2"
+                    className="text-lg text-white/60 hover:text-gold transition-colors duration-200 font-body flex items-center gap-2"
                   >
                     <span>{link.icon}</span>
                     {link.name}
@@ -129,7 +129,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="pt-8 border-t border-white/10 text-center"
         >
-          <p className="text-base text-white/50 font-body">
+          <p className="text-lg text-white/50 font-body">
             © {new Date().getFullYear()} {branding.siteTitle}. All rights
             reserved.
           </p>

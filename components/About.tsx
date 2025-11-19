@@ -65,7 +65,7 @@ export default function About() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg md:text-xl text-white/80 leading-relaxed font-body"
+              className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed font-body"
             >
               {aboutContent.content}
             </motion.p>

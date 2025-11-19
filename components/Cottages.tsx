@@ -74,7 +74,7 @@ export default function Cottages() {
             Our Cottages
           </h2>
           <div className="h-1 w-20 bg-gold mx-auto mb-6" />
-          <p className="text-lg md:text-xl text-forest/70 font-body max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl lg:text-3xl text-forest/70 font-body max-w-2xl mx-auto">
             Each retreat is thoughtfully designed to offer comfort and connection with nature
           </p>
         </motion.div>
@@ -106,13 +106,13 @@ export default function Cottages() {
                 <h3 className="text-xl font-heading font-bold text-forest mb-2">
                   {cottage.name}
                 </h3>
-                <p className="text-base text-forest/60 font-body mb-5 leading-relaxed">
+                <p className="text-lg md:text-xl text-forest/60 font-body mb-5 leading-relaxed">
                   {cottage.description}
                 </p>
 
                 {cottage.price && (
                   <div className="pt-4 border-t border-forest/10">
-                    <p className="text-base font-semibold text-gold">
+                    <p className="text-lg md:text-xl font-semibold text-gold">
                       {cottage.price}
                     </p>
                   </div>

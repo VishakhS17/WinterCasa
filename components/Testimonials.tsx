@@ -84,7 +84,7 @@ export default function Testimonials() {
             Guest Stories
           </h2>
           <div className="h-1 w-20 bg-gold mx-auto mb-6" />
-          <p className="text-lg md:text-xl text-white/70 font-body max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl lg:text-3xl text-white/70 font-body max-w-2xl mx-auto">
             Discover what our guests say about their forest sanctuary experience
           </p>
         </motion.div>
@@ -129,17 +129,17 @@ export default function Testimonials() {
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-white/90 font-body text-lg leading-relaxed mb-6">
+                <p className="text-white/90 font-body text-xl md:text-2xl leading-relaxed mb-6">
                   "{testimonial.text}"
                 </p>
 
                 {/* Author */}
                 <div className="pt-5 border-t border-white/10">
-                  <p className="text-white font-semibold font-body text-base">
+                  <p className="text-white font-semibold font-body text-lg">
                     {testimonial.name}
                   </p>
                   {testimonial.location && (
-                    <p className="text-white/50 text-sm font-body mt-1">
+                    <p className="text-white/50 text-base font-body mt-1">
                       {testimonial.location}
                     </p>
                   )}

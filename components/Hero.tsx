@@ -125,7 +125,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-2xl font-body"
+          className="text-2xl md:text-3xl lg:text-4xl text-white/90 mb-12 max-w-2xl font-body"
         >
           {branding.tagline}
         </motion.p>
@@ -138,13 +138,13 @@ export default function Hero() {
         >
           <Link
             href="#book"
-            className="px-8 py-3.5 bg-gold text-forest font-semibold rounded-lg hover:bg-gold/90 transition-all duration-200 font-body text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105"
+            className="px-8 py-3.5 bg-gold text-forest font-semibold rounded-lg hover:bg-gold/90 transition-all duration-200 font-body text-lg uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105"
           >
             Book Now
           </Link>
           <Link
             href="#about"
-            className="px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-200 font-body text-base uppercase tracking-wider border border-white/20 hover:scale-105"
+            className="px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-200 font-body text-lg uppercase tracking-wider border border-white/20 hover:scale-105"
           >
             Explore
           </Link>

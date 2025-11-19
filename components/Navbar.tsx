@@ -149,7 +149,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative transition-colors duration-200 font-body text-sm md:text-base uppercase tracking-wider group font-medium ${
+                className={`relative transition-colors duration-200 font-body text-base md:text-lg uppercase tracking-wider group font-medium ${
                   textColor === 'forest'
                     ? 'text-forest/90 hover:text-forest'
                     : 'text-white/90 hover:text-white'
@@ -168,7 +168,7 @@ export default function Navbar() {
 
           <Link
             href="#book"
-            className="px-5 md:px-7 py-2.5 md:py-3 bg-gold text-forest font-semibold rounded-lg hover:bg-gold/90 transition-all duration-200 font-body text-sm md:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105"
+            className="px-5 md:px-7 py-2.5 md:py-3 bg-gold text-forest font-semibold rounded-lg hover:bg-gold/90 transition-all duration-200 font-body text-base md:text-lg uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105"
           >
             Book Now
           </Link>
