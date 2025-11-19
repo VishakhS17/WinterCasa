@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "projectName": "Winter Casa Resort & Cottages",
+    "version": "1.0",
+    "createdBy": "V",
+    "description": "Forest-themed luxury resort website with glass-morphism design, premium aesthetics, and cinematic animations."
+  },
+  "branding": {
+    "siteTitle": "Winter Casa",
+    "tagline": "Your Forest Sanctuary",
+    "logo": "assets/logo/winter-casa-logo.svg",
+    "favIcon": "assets/favicon.ico"
+  },
+  "colors": {
+    "primary": "#0E3B2F",
+    "primaryDark": "#0E3B2F",
+    "accent": "#1F5041",
+    "accentAlt": "#1F5041",
+    "mutedGreen": "#1F5041",
+    "background": "#F8F8F8",
+    "heroOverlay": "rgba(14, 59, 47, 0.6)",
+    "cardBg": "rgba(255,255,255,0.15)",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#F8F8F8",
+    "gold": "#D4AF37"
+  },
+  "typography": {
+    "brandFonts": {
+      "heading": "'Cormorant Garamond', serif",
+      "body": "'Cormorant Garamond', serif"
+    },
+    "fontSizes": {
+      "h1": "64px",
+      "h2": "40px",
+      "h3": "28px",
+      "bodyLarge": "18px",
+      "body": "16px",
+      "small": "14px"
+    },
+    "weights": {
+      "heading": 700,
+      "subheading": 600,
+      "body": 400
+    }
+  },
+  "layout": {
+    "pageWidth": {
+      "max": "1300px",
+      "padding": "24px"
+    },
+    "grid": {
+      "columns": 12,
+      "gutter": "24px"
+    }
+  },
+  "sections": [
+    "navbar",
+    "hero",
+    "about",
+    "testimonials",
+    "contact",
+    "footer"
+  ],
+  "assets": {
+    "hero": "img1.jpg",
+    "aboutBackground": "img4.jpg",
+    "testimonials": "img6.jpg",
+    "contactMapFallback": "img7.jpg",
+    "footerBg": "img8.jpg"
+  }
+}

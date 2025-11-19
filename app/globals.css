@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #0E3B2F;
+  --color-forestLight: #1F5041;
+  --color-gold: #D4AF37;
+  --color-offwhite: #F8F8F8;
+}
+
+@layer base {
+  :root {
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Cormorant Garamond', serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-offwhite text-forest;
+    font-family: var(--font-body), serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Custom golden scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-forest;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold/80;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #D4AF37 #0E3B2F;
+  }
+}
+
+@layer utilities {
+  .glass-white {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .glass-dark {
+    background: rgba(14, 59, 47, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .border-gold {
+    @apply border-gold;
+  }
+
+  .text-shadow-soft {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .forest-gradient {
+    background: linear-gradient(180deg, rgba(14, 59, 47, 0.8) 0%, transparent 100%);
+  }
+
+  .forest-gradient-reverse {
+    background: linear-gradient(0deg, rgba(14, 59, 47, 0.8) 0%, transparent 100%);
+  }
+}
+
