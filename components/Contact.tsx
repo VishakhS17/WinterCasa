@@ -31,7 +31,7 @@ export default function Contact() {
             Find Us
           </h2>
           <div className="h-1 w-20 bg-gold mx-auto mb-6" />
-          <p className="text-base md:text-lg text-forest/70 font-body max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-forest/70 font-body max-w-2xl mx-auto">
             Nestled in nature's embrace, discover your path to tranquility
           </p>
         </motion.div>
@@ -73,10 +73,10 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-base font-semibold text-forest mb-1 font-body">
+                    <p className="text-lg font-semibold text-forest mb-1 font-body">
                       Address
                     </p>
-                    <p className="text-sm text-forest/60 font-body leading-relaxed">{contactInfo.address}</p>
+                    <p className="text-base text-forest/60 font-body leading-relaxed">{contactInfo.address}</p>
                   </div>
                 </div>
 
@@ -97,12 +97,12 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-base font-semibold text-forest mb-1 font-body">
+                    <p className="text-lg font-semibold text-forest mb-1 font-body">
                       Phone
                     </p>
                     <a
                       href={`tel:${contactInfo.phone}`}
-                      className="text-sm text-forest/60 hover:text-gold transition-colors font-body"
+                      className="text-base text-forest/60 hover:text-gold transition-colors font-body"
                     >
                       {contactInfo.phone}
                     </a>
@@ -126,12 +126,12 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-base font-semibold text-forest mb-1 font-body">
+                    <p className="text-lg font-semibold text-forest mb-1 font-body">
                       Email
                     </p>
                     <a
                       href={`mailto:${contactInfo.email}`}
-                      className="text-sm text-forest/60 hover:text-gold transition-colors font-body"
+                      className="text-base text-forest/60 hover:text-gold transition-colors font-body"
                     >
                       {contactInfo.email}
                     </a>

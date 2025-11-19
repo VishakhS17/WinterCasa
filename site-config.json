@@ -33,9 +33,9 @@
       "h1": "64px",
       "h2": "40px",
       "h3": "28px",
-      "bodyLarge": "18px",
-      "body": "16px",
-      "small": "14px"
+      "bodyLarge": "22px",
+      "body": "20px",
+      "small": "16px"
     },
     "weights": {
       "heading": 700,
