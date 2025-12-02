@@ -1,13 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { getBranding } from '@/lib/theme'
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
   
@@ -16,24 +13,6 @@ export default function Hero() {
   const y = useSpring(useTransform(mouseY, [-1, 1], [-20, 20]), springConfig)
 
   const branding = getBranding()
-
-  // Forest-themed image placeholders from Unsplash
-  const slideImages = [
-    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80', // Misty forest path
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80', // Mountain forest
-    'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80', // Dense forest
-    'https://images.unsplash.com/photo-1511497584788-876760111969?w=1920&q=80', // Forest cabin
-    'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1920&q=80', // Serene forest
-    'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1920&q=80', // Woodland trail
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slideImages.length)
-    }, 5000) // 5 seconds per slide
-
-    return () => clearInterval(interval)
-  }, [slideImages.length])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -55,29 +34,17 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background slideshow */}
+      {/* Video background */}
       <div className="absolute inset-0">
-        {slideImages.map((image, index) => (
-          <motion.div
-            key={index}
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: currentSlide === index ? 1 : 0,
-              scale: currentSlide === index ? 1.05 : 1,
-            }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-          >
-            <Image
-              src={image}
-              alt={`Slide ${index + 1}`}
-              fill
-              priority={index === 0}
-              className="object-cover"
-              sizes="100vw"
-            />
-          </motion.div>
-        ))}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/IMG_3646.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Forest gradient overlay */}
@@ -109,7 +76,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6"
+          className="text-6xl md:text-8xl lg:text-9xl font-heading font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-gold to-gold/70"
         >
           {branding.siteTitle}
         </motion.h1>
@@ -137,35 +104,14 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4"
         >
           <Link
-            href="#book"
+            href="/booking"
             className="px-8 py-3.5 bg-gold text-forest font-semibold rounded-lg hover:bg-gold/90 transition-all duration-200 font-body text-lg uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105"
           >
             Book Now
           </Link>
-          <Link
-            href="#about"
-            className="px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-200 font-body text-lg uppercase tracking-wider border border-white/20 hover:scale-105"
-          >
-            Explore
-          </Link>
         </motion.div>
       </motion.div>
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
-        {slideImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`h-1.5 transition-all duration-300 ${
-              currentSlide === index
-                ? 'w-8 bg-gold'
-                : 'w-1.5 bg-white/50 hover:bg-white/75'
-            } rounded-full`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
     </section>
   )
 }

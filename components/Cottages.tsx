@@ -7,40 +7,24 @@ interface Cottage {
   name: string
   description: string
   image: string
-  price?: string
-  features?: string[]
 }
 
 export default function Cottages() {
-  // Default cottages data - can be extended from config
   const cottages: Cottage[] = [
     {
-      name: 'Forest View Suite',
-      description: 'Panoramic forest vistas with floor-to-ceiling windows',
+      name: 'Classic Room',
+      description: 'Comfortable and cozy accommodations nestled in nature, perfect for a peaceful retreat. Complimentary coffee and tea included.',
       image: '/img5.jpg',
-      price: 'From $299/night',
-      features: ['King Bed', 'Private Deck', 'Fireplace', 'Spa Bath'],
     },
     {
-      name: 'Canopy Cabin',
-      description: 'Elevated luxury among the treetops',
+      name: 'Deluxe Room',
+      description: 'Spacious and elegantly designed rooms with premium amenities, offering an enhanced stay experience. Complimentary coffee and tea included.',
       image: '/img6.jpg',
-      price: 'From $349/night',
-      features: ['Loft Style', 'Hot Tub', 'Nature Sounds', 'Minibar'],
     },
     {
-      name: 'Riverside Retreat',
-      description: 'Serene water views with private access',
+      name: 'Private Cottage',
+      description: 'Exclusive cottage accommodations with private outdoor space, perfect for gatherings, campfire evenings, and special celebrations. Complimentary coffee and tea included.',
       image: '/img7.jpg',
-      price: 'From $379/night',
-      features: ['Waterfront', 'Kayak Access', 'Outdoor Shower', 'BBQ Area'],
-    },
-    {
-      name: 'Mountain Hideaway',
-      description: 'Secluded cabin with mountain panoramas',
-      image: '/img8.jpg',
-      price: 'From $329/night',
-      features: ['Mountain Views', 'Hiking Trails', 'Cozy Fireplace', 'Full Kitchen'],
     },
   ]
 
@@ -79,7 +63,7 @@ export default function Cottages() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cottages.map((cottage, index) => (
             <motion.div
               key={index}
@@ -109,14 +93,6 @@ export default function Cottages() {
                 <p className="text-lg md:text-xl text-forest/60 font-body mb-5 leading-relaxed">
                   {cottage.description}
                 </p>
-
-                {cottage.price && (
-                  <div className="pt-4 border-t border-forest/10">
-                    <p className="text-lg md:text-xl font-semibold text-gold">
-                      {cottage.price}
-                    </p>
-                  </div>
-                )}
               </div>
             </motion.div>
           ))}

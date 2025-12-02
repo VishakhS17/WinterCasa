@@ -8,10 +8,12 @@ export default function Contact() {
   const assets = getAssets()
 
   const contactInfo = {
-    address: '123 Forest Trail Road, Mountain View, CA 94041',
-    phone: '+1 (555) 123-4567',
-    email: 'hello@wintercasa.com',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.6391106202877!2d-122.0846305843266!3d37.42199897982597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fba02425dad8f%3A0x6c296c66619367e0!2sGoogleplex!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus',
+    address: 'Power House Road,Chithirapuram, Chithirapuram, Kerala 685565',
+    phonePrimary: '+91 9496101377',
+    phoneSecondary: '+91 8113057252',
+    instagramUrl: 'https://www.instagram.com/winter_casa/',
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4302.290346115264!2d77.0495117!3d10.0296132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07985c371978c9%3A0x9cbd5c488cc247e9!2sWinter%20Casa%20Resort%20and%20Cottages!5e1!3m2!1sen!2sin!4v1764669175330!5m2!1sen!2sin',
   }
 
   return (
@@ -100,12 +102,20 @@ export default function Contact() {
                     <p className="text-xl font-semibold text-forest mb-1 font-body">
                       Phone
                     </p>
-                    <a
-                      href={`tel:${contactInfo.phone}`}
-                      className="text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
-                    >
-                      {contactInfo.phone}
-                    </a>
+                    <div className="space-y-1">
+                      <a
+                        href={`tel:${contactInfo.phonePrimary}`}
+                        className="block text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
+                      >
+                        {contactInfo.phonePrimary}
+                      </a>
+                      <a
+                        href={`tel:${contactInfo.phoneSecondary}`}
+                        className="block text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
+                      >
+                        {contactInfo.phoneSecondary}
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -127,13 +137,15 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xl font-semibold text-forest mb-1 font-body">
-                      Email
+                      Instagram
                     </p>
                     <a
-                      href={`mailto:${contactInfo.email}`}
+                      href={contactInfo.instagramUrl}
                       className="text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
+                      target="_blank"
+                      rel="noreferrer"
                     >
-                      {contactInfo.email}
+                      @winter_casa
                     </a>
                   </div>
                 </div>

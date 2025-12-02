@@ -131,14 +131,10 @@ export default function Navbar() {
         }}
       >
         <div className="flex items-center justify-between">
-          <motion.div
-            style={{ scale: logoSize }}
-          >
+          <motion.div style={{ scale: logoSize }}>
             <Link
               href="#home"
-              className={`text-2xl md:text-3xl font-heading font-bold z-10 transition-colors duration-300 block ${
-                textColor === 'forest' ? 'text-forest' : 'text-white'
-              }`}
+              className="text-2xl md:text-3xl font-heading font-bold z-10 block text-transparent bg-clip-text bg-gradient-to-r from-[#8b6b2c] via-[#f5e3a1] to-[#d4af37]"
             >
               {branding.siteTitle}
             </Link>
@@ -167,7 +163,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href="#book"
+            href="/booking"
             className="px-5 md:px-7 py-2.5 md:py-3 bg-gold text-forest font-semibold rounded-lg hover:bg-gold/90 transition-all duration-200 font-body text-base md:text-lg uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105"
           >
             Book Now

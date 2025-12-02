@@ -17,34 +17,39 @@ interface Testimonial {
 export default function Testimonials() {
   const testimonials: Testimonial[] = [
     {
-      name: 'Sarah & James Wilson',
-      text: 'An absolutely magical experience. The forest views, the cozy fireplace, and the attention to detail made our anniversary unforgettable.',
+      name: 'Arathy Tp',
+      text: 'The rooms are all very clean and it is a peaceful place to spend with family or friends. The staff are all well-behaved. The view from the room is worth mentioning. All in all, it was a good experience.',
       rating: 5,
-      location: 'New York, USA',
     },
     {
-      name: 'Michael Chen',
-      text: 'Winter Casa exceeded all expectations. Waking up to misty forest mornings from our canopy cabin was a dream come true.',
+      name: 'Abhishek Kumar',
+      text: 'Overall, very good experience with Winter Casa resort. Service is very good, food was very good. One most important thing: Owner himself taking care of all guests. Staff are very helpful. Rooms were very neat and clean. View from room is awesome. Thank you Winter Casa for making our memory beautiful.',
       rating: 5,
-      location: 'San Francisco, USA',
     },
     {
-      name: 'Emma Thompson',
-      text: 'The perfect blend of luxury and nature. Every moment felt like a scene from a storybook. We will definitely return!',
+      name: 'Aparna Salin',
+      text: 'The staff were friendly and accommodating, and went out of their way to make guests feel comfortable. Such an amazing experience I have ever had.',
       rating: 5,
-      location: 'London, UK',
     },
     {
-      name: 'David Rodriguez',
-      text: 'Peace, tranquility, and unmatched hospitality. This resort redefined what a nature retreat should be.',
+      name: 'Raziq',
+      text: 'Wonderful place to stay. The room view and service were amazing, and the price is affordable. I would highly recommend this place.',
       rating: 5,
-      location: 'Madrid, Spain',
     },
     {
-      name: 'Lisa Anderson',
-      text: 'From the gold-accented details to the forest immersion, every aspect was thoughtfully designed. A true sanctuary.',
+      name: 'Devanand N',
+      text: 'Honestly saw many negative reviews on Google, but personally we loved their hospitality and stay. Got a nice view for day and night without any compromise.',
       rating: 5,
-      location: 'Vancouver, Canada',
+    },
+    {
+      name: 'Jaimini Shastriji',
+      text: 'Really a great experience to stay here. Great location. Nice warm-hearted staff including the owner. Very nice rooms.',
+      rating: 5,
+    },
+    {
+      name: 'Pradeep Babu',
+      text: "It's a very nice room, amazing view, well maintained by the owner and housekeeping team. Mr. Vijay guided us a lot about Munnar, but we don't have enough time to stay there. I will suggest this resort to my friends and colleagues.",
+      rating: 5,
     },
   ]
 
@@ -113,28 +118,28 @@ export default function Testimonials() {
           className="!pb-12"
         >
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="!h-auto">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-8 h-full border border-white/10 hover:border-gold/30 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-8 h-full min-h-[400px] border border-white/10 hover:border-gold/30 transition-all duration-300 flex flex-col"
               >
                 {/* Stars */}
-                <div className="flex gap-1 mb-5">
+                <div className="flex gap-1 mb-5 flex-shrink-0">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <StarIcon key={i} />
                   ))}
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-white/90 font-body text-xl md:text-2xl leading-relaxed mb-6">
+                <p className="text-white/90 font-body text-xl md:text-2xl leading-relaxed mb-6 flex-grow">
                   "{testimonial.text}"
                 </p>
 
                 {/* Author */}
-                <div className="pt-5 border-t border-white/10">
+                <div className="pt-5 border-t border-white/10 flex-shrink-0">
                   <p className="text-white font-semibold font-body text-lg">
                     {testimonial.name}
                   </p>
