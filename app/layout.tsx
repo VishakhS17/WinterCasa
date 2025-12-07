@@ -15,6 +15,9 @@ const branding = getBranding()
 export const metadata: Metadata = {
   title: branding.siteTitle,
   description: branding.tagline,
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({
