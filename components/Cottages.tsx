@@ -69,10 +69,15 @@ export default function Cottages() {
   }
 
   const handleTouchMove = (cottageIndex: number, e: React.TouchEvent) => {
+    // Prevent default to stop page scroll
+    e.preventDefault()
     touchEndX.current[cottageIndex] = e.touches[0].clientX
   }
 
-  const handleTouchEnd = (cottageIndex: number) => {
+  const handleTouchEnd = (cottageIndex: number, e: React.TouchEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
     const startX = touchStartX.current[cottageIndex]
     const endX = touchEndX.current[cottageIndex]
     
@@ -150,21 +155,51 @@ export default function Cottages() {
                 {/* Image Section */}
                 <div 
                   className="relative h-80 md:h-96 overflow-hidden bg-gray-100"
-                  onTouchStart={(e) => hasCarousel && handleTouchStart(cottageIndex, e)}
-                  onTouchMove={(e) => hasCarousel && handleTouchMove(cottageIndex, e)}
-                  onTouchEnd={() => hasCarousel && handleTouchEnd(cottageIndex)}
+                  style={{ touchAction: hasCarousel ? 'pan-x pan-y' : 'auto' }}
+                  onTouchStart={(e) => {
+                    if (hasCarousel) {
+                      e.stopPropagation()
+                      handleTouchStart(cottageIndex, e)
+                    }
+                  }}
+                  onTouchMove={(e) => {
+                    if (hasCarousel) {
+                      // Only prevent default if it's a horizontal swipe
+                      const startX = touchStartX.current[cottageIndex]
+                      if (startX) {
+                        const currentX = e.touches[0].clientX
+                        const diff = Math.abs(currentX - startX)
+                        // If horizontal movement is significant, prevent vertical scroll
+                        if (diff > 10) {
+                          e.preventDefault()
+                        }
+                      }
+                      e.stopPropagation()
+                      handleTouchMove(cottageIndex, e)
+                    }
+                  }}
+                  onTouchEnd={(e) => {
+                    if (hasCarousel) {
+                      e.stopPropagation()
+                      handleTouchEnd(cottageIndex, e)
+                    }
+                  }}
                 >
                   {hasCarousel ? (
                     <>
-                      {/* Carousel Images */}
-                      {displayImages.map((imgSrc, imgIdx) => {
-                        const isVisible = imgIdx === currentImageIdx
-                        return (
+                      {/* Carousel Container - Slides horizontally */}
+                      <div 
+                        className="flex h-full transition-transform duration-500 ease-in-out"
+                        style={{
+                          transform: `translateX(-${currentImageIdx * 100}%)`,
+                          width: `${displayImages.length * 100}%`,
+                        }}
+                      >
+                        {displayImages.map((imgSrc, imgIdx) => (
                           <div
                             key={`cottage-${cottageIndex}-img-${imgIdx}`}
-                            className={`absolute inset-0 transition-opacity duration-500 ${
-                              isVisible ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                            }`}
+                            className="relative h-full flex-shrink-0"
+                            style={{ width: `${100 / displayImages.length}%` }}
                           >
                             <Image
                               src={imgSrc}
@@ -175,8 +210,8 @@ export default function Cottages() {
                               priority={imgIdx === 0}
                             />
                           </div>
-                        )
-                      })}
+                        ))}
+                      </div>
 
                       {/* Navigation Buttons */}
                       <button
