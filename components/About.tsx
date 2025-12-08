@@ -12,7 +12,7 @@ export default function About() {
     content: `Nestled in the heart of pristine wilderness, Winter Casa offers an escape to tranquility. Our luxury cottages blend seamlessly with nature, providing an unparalleled experience where forest whispers meet refined comfort. Every detail is crafted to immerse you in the serenity of the woods while indulging in premium amenities.`,
   }
 
-  const imageGrid = ['/img1.jpg', '/img2.jpg', '/img3.jpg'].filter(Boolean)
+  const imageGrid = ['/IMG20251114132916.jpg', '/img2.jpg', '/img4.jpg'].filter(Boolean)
 
   return (
     <section
@@ -77,7 +77,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative grid grid-cols-2 gap-3 h-[500px]"
+            className="relative grid grid-cols-2 grid-rows-2 gap-3 h-[500px]"
           >
             {imageGrid.map((img, index) => (
               <motion.div
@@ -88,7 +88,7 @@ export default function About() {
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 className={`relative rounded-lg overflow-hidden ${
                   index === 0
-                    ? 'row-span-2 border border-gold/40'
+                    ? 'col-span-2 border border-gold/40'
                     : 'border border-gold/20'
                 }`}
                 whileHover={{ scale: 1.02, zIndex: 10 }}
