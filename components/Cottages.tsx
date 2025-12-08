@@ -23,7 +23,7 @@ export default function Cottages() {
       name: 'Deluxe Room',
       description: 'Spacious and elegantly designed rooms with premium amenities, offering an enhanced stay experience. Complimentary coffee and tea included.',
       image: '/Deluxe1.jpg',
-      images: ['/Deluxe1.jpg', '/Deluxe2.jpg', '/Deluxe3.jpg'],
+      images: ['/Deluxe1.jpg', '/Deluxe2.jpg', '/Deluxe3.jpg', '/Deluxe4.jpg'],
     },
     {
       name: 'Private Cottage',
