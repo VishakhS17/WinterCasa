@@ -14,21 +14,16 @@ interface Cottage {
 export default function Cottages() {
   const cottages: Cottage[] = [
     {
-      name: 'Classic Room',
-      description: 'Comfortable and cozy accommodations nestled in nature, perfect for a peaceful retreat. Complimentary coffee and tea included.',
-      image: '/Classic1.jpg',
-      images: ['/Classic1.jpg', '/Classic2.jpg', '/Classic3.jpg'],
-    },
-    {
       name: 'Deluxe Room',
       description: 'Spacious and elegantly designed rooms with premium amenities, offering an enhanced stay experience. Complimentary coffee and tea included.',
       image: '/Deluxe1.jpg',
-      images: ['/Deluxe1.jpg', '/Deluxe2.jpg', '/Deluxe3.jpg', '/Deluxe4.jpg'],
+      images: ['/Deluxe1.jpg', '/Deluxe2.jpg', '/Deluxe3.jpg', '/Deluxe4.jpg', '/Deluxe5.jpg'],
     },
     {
       name: 'Private Cottage',
       description: 'Exclusive cottage accommodations with private outdoor space, perfect for gatherings, campfire evenings, and special celebrations. Complimentary coffee and tea included.',
       image: '/PrivateCottage.jpg',
+      images: ['/PrivateCottage.jpg', '/PrivateCottage2.jpg'],
     },
   ]
 
@@ -137,7 +132,7 @@ export default function Cottages() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {cottages.map((cottage, cottageIndex) => {
             const hasCarousel = cottage.images && cottage.images.length > 1
             const currentImageIdx = imageIndices[cottageIndex] || 0
@@ -155,7 +150,7 @@ export default function Cottages() {
               >
                 {/* Image Section */}
                 <div 
-                  className="relative h-80 md:h-96 overflow-hidden bg-gray-100"
+                  className="relative h-96 md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-100"
                   onTouchStart={hasCarousel ? (e) => handleTouchStart(cottageIndex, e) : undefined}
                   onTouchMove={hasCarousel ? (e) => handleTouchMove(cottageIndex, e) : undefined}
                   onTouchEnd={hasCarousel ? (e) => handleTouchEnd(cottageIndex, e) : undefined}
