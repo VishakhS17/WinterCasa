@@ -139,15 +139,15 @@ export default function Cottages() {
             const displayImages = cottage.images || [cottage.image]
 
             return (
-              <motion.div
+            <motion.div
                 key={cottageIndex}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: cottageIndex * 0.08 }}
-                className="group relative bg-white rounded-lg overflow-hidden border border-forest/10 hover:border-gold/40 transition-all duration-300 shadow-sm hover:shadow-xl"
-                whileHover={{ y: -4 }}
-              >
+              className="group relative bg-white rounded-lg overflow-hidden border border-forest/10 hover:border-gold/40 transition-all duration-300 shadow-sm hover:shadow-xl"
+              whileHover={{ y: -4 }}
+            >
                 {/* Image Section */}
                 <div 
                   className="relative h-96 md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-100"
@@ -251,26 +251,26 @@ export default function Cottages() {
                       </div>
                     </>
                   ) : (
-                    <Image
-                      src={cottage.image}
-                      alt={cottage.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                <Image
+                  src={cottage.image}
+                  alt={cottage.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
+                />
                   )}
-                </div>
+              </div>
 
                 {/* Content Section */}
-                <div className="p-6">
-                  <h3 className="text-xl font-heading font-bold text-forest mb-2">
-                    {cottage.name}
-                  </h3>
-                  <p className="text-lg md:text-xl text-forest/60 font-body mb-5 leading-relaxed">
-                    {cottage.description}
-                  </p>
-                </div>
-              </motion.div>
+              <div className="p-6">
+                <h3 className="text-xl font-heading font-bold text-forest mb-2">
+                  {cottage.name}
+                </h3>
+                <p className="text-lg md:text-xl text-forest/60 font-body mb-5 leading-relaxed">
+                  {cottage.description}
+                </p>
+              </div>
+            </motion.div>
             )
           })}
         </div>

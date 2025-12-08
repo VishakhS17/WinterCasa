@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Cottages from '@/components/Cottages'
+import Features from '@/components/Features'
 import Testimonials from '@/components/Testimonials'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
@@ -84,14 +85,15 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <main className="min-h-screen overflow-x-hidden w-full">
-        <Navbar />
-        <Hero />
-        <About />
-        <Cottages />
-        <Testimonials />
-        <Contact />
-        <Footer />
-      </main>
+      <Navbar />
+      <Hero />
+      <About />
+      <Cottages />
+      <Features />
+      <Contact />
+      <Testimonials />
+      <Footer />
+    </main>
     </>
   )
 }

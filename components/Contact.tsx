@@ -122,13 +122,13 @@ export default function Contact() {
                     </p>
                     <div className="space-y-2">
                       <div className="flex items-center gap-3">
-                        <a
+                      <a
                           href={`tel:${contactInfo.phonePrimary.replace(/\s/g, '')}`}
                           className="text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
-                        >
-                          {contactInfo.phonePrimary}
-                        </a>
-                        <a
+                      >
+                        {contactInfo.phonePrimary}
+                      </a>
+                      <a
                           href={getWhatsAppUrl(contactInfo.phonePrimary)}
                           target="_blank"
                           rel="noreferrer"
@@ -148,9 +148,9 @@ export default function Contact() {
                         <a
                           href={`tel:${contactInfo.phoneSecondary.replace(/\s/g, '')}`}
                           className="text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
-                        >
-                          {contactInfo.phoneSecondary}
-                        </a>
+                      >
+                        {contactInfo.phoneSecondary}
+                      </a>
                         <a
                           href={getWhatsAppUrl(contactInfo.phoneSecondary)}
                           target="_blank"
