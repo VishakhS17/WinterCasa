@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 interface Cottage {
   name: string
@@ -37,6 +37,9 @@ export default function Cottages() {
     1: 0,
   })
 
+  const touchStartX = useRef<Record<number, number>>({})
+  const touchEndX = useRef<Record<number, number>>({})
+
   const changeImage = (cottageIndex: number, direction: 'next' | 'prev' | number) => {
     const cottage = cottages[cottageIndex]
     const images = cottage.images
@@ -59,6 +62,38 @@ export default function Cottages() {
         [cottageIndex]: newIndex,
       }
     })
+  }
+
+  const handleTouchStart = (cottageIndex: number, e: React.TouchEvent) => {
+    touchStartX.current[cottageIndex] = e.touches[0].clientX
+  }
+
+  const handleTouchMove = (cottageIndex: number, e: React.TouchEvent) => {
+    touchEndX.current[cottageIndex] = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (cottageIndex: number) => {
+    const startX = touchStartX.current[cottageIndex]
+    const endX = touchEndX.current[cottageIndex]
+    
+    if (!startX || !endX) return
+
+    const diff = startX - endX
+    const minSwipeDistance = 50 // Minimum distance for a swipe
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        // Swiped left - next image
+        changeImage(cottageIndex, 'next')
+      } else {
+        // Swiped right - previous image
+        changeImage(cottageIndex, 'prev')
+      }
+    }
+
+    // Reset touch positions
+    touchStartX.current[cottageIndex] = 0
+    touchEndX.current[cottageIndex] = 0
   }
 
   return (
@@ -113,7 +148,12 @@ export default function Cottages() {
                 whileHover={{ y: -4 }}
               >
                 {/* Image Section */}
-                <div className="relative h-80 md:h-96 overflow-hidden bg-gray-100">
+                <div 
+                  className="relative h-80 md:h-96 overflow-hidden bg-gray-100"
+                  onTouchStart={(e) => hasCarousel && handleTouchStart(cottageIndex, e)}
+                  onTouchMove={(e) => hasCarousel && handleTouchMove(cottageIndex, e)}
+                  onTouchEnd={() => hasCarousel && handleTouchEnd(cottageIndex)}
+                >
                   {hasCarousel ? (
                     <>
                       {/* Carousel Images */}
