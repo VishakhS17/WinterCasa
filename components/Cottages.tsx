@@ -64,39 +64,40 @@ export default function Cottages() {
     })
   }
 
-  const handleTouchStart = (cottageIndex: number, e: React.TouchEvent) => {
+  const handleTouchStart = (cottageIndex: number, e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current[cottageIndex] = e.touches[0].clientX
   }
 
-  const handleTouchMove = (cottageIndex: number, e: React.TouchEvent) => {
-    // Prevent default to stop page scroll
-    e.preventDefault()
-    touchEndX.current[cottageIndex] = e.touches[0].clientX
+  const handleTouchMove = (cottageIndex: number, e: React.TouchEvent<HTMLDivElement>) => {
+    const startX = touchStartX.current[cottageIndex]
+    if (startX) {
+      const currentX = e.touches[0].clientX
+      const diff = Math.abs(currentX - startX)
+      // Only prevent default if horizontal movement is significant
+      if (diff > 5) {
+        e.preventDefault()
+      }
+      touchEndX.current[cottageIndex] = currentX
+    }
   }
 
-  const handleTouchEnd = (cottageIndex: number, e: React.TouchEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    
+  const handleTouchEnd = (cottageIndex: number, e: React.TouchEvent<HTMLDivElement>) => {
     const startX = touchStartX.current[cottageIndex]
     const endX = touchEndX.current[cottageIndex]
     
-    if (!startX || !endX) return
+    if (startX && endX) {
+      const diff = startX - endX
+      const minSwipeDistance = 50
 
-    const diff = startX - endX
-    const minSwipeDistance = 50 // Minimum distance for a swipe
-
-    if (Math.abs(diff) > minSwipeDistance) {
-      if (diff > 0) {
-        // Swiped left - next image
-        changeImage(cottageIndex, 'next')
-      } else {
-        // Swiped right - previous image
-        changeImage(cottageIndex, 'prev')
+      if (Math.abs(diff) > minSwipeDistance) {
+        if (diff > 0) {
+          changeImage(cottageIndex, 'next')
+        } else {
+          changeImage(cottageIndex, 'prev')
+        }
       }
     }
 
-    // Reset touch positions
     touchStartX.current[cottageIndex] = 0
     touchEndX.current[cottageIndex] = 0
   }
@@ -155,35 +156,10 @@ export default function Cottages() {
                 {/* Image Section */}
                 <div 
                   className="relative h-80 md:h-96 overflow-hidden bg-gray-100"
-                  style={{ touchAction: hasCarousel ? 'pan-x pan-y' : 'auto' }}
-                  onTouchStart={(e) => {
-                    if (hasCarousel) {
-                      e.stopPropagation()
-                      handleTouchStart(cottageIndex, e)
-                    }
-                  }}
-                  onTouchMove={(e) => {
-                    if (hasCarousel) {
-                      // Only prevent default if it's a horizontal swipe
-                      const startX = touchStartX.current[cottageIndex]
-                      if (startX) {
-                        const currentX = e.touches[0].clientX
-                        const diff = Math.abs(currentX - startX)
-                        // If horizontal movement is significant, prevent vertical scroll
-                        if (diff > 10) {
-                          e.preventDefault()
-                        }
-                      }
-                      e.stopPropagation()
-                      handleTouchMove(cottageIndex, e)
-                    }
-                  }}
-                  onTouchEnd={(e) => {
-                    if (hasCarousel) {
-                      e.stopPropagation()
-                      handleTouchEnd(cottageIndex, e)
-                    }
-                  }}
+                  onTouchStart={hasCarousel ? (e) => handleTouchStart(cottageIndex, e) : undefined}
+                  onTouchMove={hasCarousel ? (e) => handleTouchMove(cottageIndex, e) : undefined}
+                  onTouchEnd={hasCarousel ? (e) => handleTouchEnd(cottageIndex, e) : undefined}
+                  style={{ touchAction: hasCarousel ? 'pan-y pinch-zoom' : 'auto' }}
                 >
                   {hasCarousel ? (
                     <>
@@ -191,26 +167,33 @@ export default function Cottages() {
                       <div 
                         className="flex h-full transition-transform duration-500 ease-in-out"
                         style={{
-                          transform: `translateX(-${currentImageIdx * 100}%)`,
+                          transform: `translateX(-${(currentImageIdx * 100) / displayImages.length}%)`,
                           width: `${displayImages.length * 100}%`,
                         }}
                       >
-                        {displayImages.map((imgSrc, imgIdx) => (
-                          <div
-                            key={`cottage-${cottageIndex}-img-${imgIdx}`}
-                            className="relative h-full flex-shrink-0"
-                            style={{ width: `${100 / displayImages.length}%` }}
-                          >
-                            <Image
-                              src={imgSrc}
-                              alt={`${cottage.name} - View ${imgIdx + 1}`}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                              priority={imgIdx === 0}
-                            />
-                          </div>
-                        ))}
+                        {displayImages.map((imgSrc, imgIdx) => {
+                          const imageWidthPercent = 100 / displayImages.length
+                          return (
+                            <div
+                              key={`cottage-${cottageIndex}-img-${imgIdx}`}
+                              className="relative h-full flex-shrink-0"
+                              style={{ 
+                                width: `${imageWidthPercent}%`,
+                                minWidth: `${imageWidthPercent}%`,
+                                maxWidth: `${imageWidthPercent}%`,
+                              }}
+                            >
+                              <Image
+                                src={imgSrc}
+                                alt={`${cottage.name} - View ${imgIdx + 1}`}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                priority={imgIdx === 0}
+                              />
+                            </div>
+                          )
+                        })}
                       </div>
 
                       {/* Navigation Buttons */}
