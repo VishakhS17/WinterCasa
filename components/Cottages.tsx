@@ -39,7 +39,8 @@ export default function Cottages() {
 
   const changeImage = (cottageIndex: number, direction: 'next' | 'prev' | number) => {
     const cottage = cottages[cottageIndex]
-    if (!cottage.images || cottage.images.length <= 1) return
+    const images = cottage.images
+    if (!images || images.length <= 1) return
 
     setImageIndices((prev) => {
       const current = prev[cottageIndex] || 0
@@ -48,9 +49,9 @@ export default function Cottages() {
       if (typeof direction === 'number') {
         newIndex = direction
       } else if (direction === 'next') {
-        newIndex = (current + 1) % cottage.images.length
+        newIndex = (current + 1) % images.length
       } else {
-        newIndex = (current - 1 + cottage.images.length) % cottage.images.length
+        newIndex = (current - 1 + images.length) % images.length
       }
 
       return {
