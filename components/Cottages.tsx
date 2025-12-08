@@ -14,17 +14,17 @@ export default function Cottages() {
     {
       name: 'Classic Room',
       description: 'Comfortable and cozy accommodations nestled in nature, perfect for a peaceful retreat. Complimentary coffee and tea included.',
-      image: '/img5.jpg',
+      image: '/Classic2.jpg',
     },
     {
       name: 'Deluxe Room',
       description: 'Spacious and elegantly designed rooms with premium amenities, offering an enhanced stay experience. Complimentary coffee and tea included.',
-      image: '/img6.jpg',
+      image: '/Deluxe.jpg',
     },
     {
       name: 'Private Cottage',
       description: 'Exclusive cottage accommodations with private outdoor space, perfect for gatherings, campfire evenings, and special celebrations. Complimentary coffee and tea included.',
-      image: '/img7.jpg',
+      image: '/PrivateCottage.jpg',
     },
   ]
 
