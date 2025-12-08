@@ -2,11 +2,13 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useState } from 'react'
 
 interface Cottage {
   name: string
   description: string
   image: string
+  images?: string[]
 }
 
 export default function Cottages() {
@@ -15,11 +17,13 @@ export default function Cottages() {
       name: 'Classic Room',
       description: 'Comfortable and cozy accommodations nestled in nature, perfect for a peaceful retreat. Complimentary coffee and tea included.',
       image: '/Classic2.jpg',
+      images: ['/Classic1.jpg', '/Classic2.jpg', '/Classic3.jpg'],
     },
     {
       name: 'Deluxe Room',
       description: 'Spacious and elegantly designed rooms with premium amenities, offering an enhanced stay experience. Complimentary coffee and tea included.',
       image: '/Deluxe.jpg',
+      images: ['/Deluxe1.jpg', '/Deluxe2.jpg', '/Deluxe3.jpg'],
     },
     {
       name: 'Private Cottage',
@@ -27,6 +31,8 @@ export default function Cottages() {
       image: '/PrivateCottage.jpg',
     },
   ]
+
+  const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({})
 
   return (
     <section
@@ -64,38 +70,151 @@ export default function Cottages() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cottages.map((cottage, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group relative bg-white rounded-lg overflow-hidden border border-forest/10 hover:border-gold/40 transition-all duration-300 shadow-sm hover:shadow-xl"
-              whileHover={{ y: -4 }}
-            >
-              {/* Image */}
-              <div className="relative h-56 overflow-hidden">
-                <Image
-                  src={cottage.image}
-                  alt={cottage.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
+          {cottages.map((cottage, index) => {
+            const hasMultipleImages = cottage.images && cottage.images.length > 1
+            const currentIndex = currentImageIndex[index] || 0
+            const images = cottage.images || [cottage.image]
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-heading font-bold text-forest mb-2">
-                  {cottage.name}
-                </h3>
-                <p className="text-lg md:text-xl text-forest/60 font-body mb-5 leading-relaxed">
-                  {cottage.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+            const nextImage = () => {
+              if (hasMultipleImages) {
+                setCurrentImageIndex((prev) => ({
+                  ...prev,
+                  [index]: (currentIndex + 1) % images.length,
+                }))
+              }
+            }
+
+            const prevImage = () => {
+              if (hasMultipleImages) {
+                setCurrentImageIndex((prev) => ({
+                  ...prev,
+                  [index]: (currentIndex - 1 + images.length) % images.length,
+                }))
+              }
+            }
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="group relative bg-white rounded-lg overflow-hidden border border-forest/10 hover:border-gold/40 transition-all duration-300 shadow-sm hover:shadow-xl"
+                whileHover={{ y: -4 }}
+              >
+                {/* Image Carousel */}
+                <div className="relative h-56 overflow-hidden">
+                  {hasMultipleImages ? (
+                    <>
+                      {/* Images Container */}
+                      <div className="relative h-full w-full">
+                        {images.map((img, imgIndex) => (
+                          <motion.div
+                            key={imgIndex}
+                            initial={false}
+                            animate={{
+                              x: `-${currentIndex * 100}%`,
+                              opacity: imgIndex === currentIndex ? 1 : 0,
+                            }}
+                            transition={{ duration: 0.5, ease: 'easeInOut' }}
+                            className="absolute inset-0"
+                          >
+                            <Image
+                              src={img}
+                              alt={`${cottage.name} - Image ${imgIndex + 1}`}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            />
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Navigation Arrows */}
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-forest p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                        aria-label="Previous image"
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 19l-7-7 7-7"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-forest p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                        aria-label="Next image"
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+
+                      {/* Dots Indicator */}
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                        {images.map((_, imgIndex) => (
+                          <button
+                            key={imgIndex}
+                            onClick={() =>
+                              setCurrentImageIndex((prev) => ({
+                                ...prev,
+                                [index]: imgIndex,
+                              }))
+                            }
+                            className={`h-2 rounded-full transition-all duration-300 ${
+                              imgIndex === currentIndex
+                                ? 'w-6 bg-gold'
+                                : 'w-2 bg-white/60 hover:bg-white/80'
+                            }`}
+                            aria-label={`Go to image ${imgIndex + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <Image
+                      src={cottage.image}
+                      alt={cottage.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-heading font-bold text-forest mb-2">
+                    {cottage.name}
+                  </h3>
+                  <p className="text-lg md:text-xl text-forest/60 font-body mb-5 leading-relaxed">
+                    {cottage.description}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
