@@ -194,6 +194,7 @@ export default function Hero() {
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
+          aria-label="Winter Casa Resort - Luxury forest resort in Kerala, Munnar"
         >
           <source src="/IMG_3646.mp4" type="video/mp4" />
         </video>

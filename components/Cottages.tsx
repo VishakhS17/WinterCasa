@@ -111,7 +111,7 @@ export default function Cottages() {
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1511497584788-876760111969?w=1920&q=80"
-          alt="Cabin background"
+          alt="Winter Casa Resort cottages and luxury accommodations in forest setting, Kerala"
           fill
           className="object-cover"
           sizes="100vw"

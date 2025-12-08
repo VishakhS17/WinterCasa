@@ -23,7 +23,7 @@ export default function About() {
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920&q=80"
-          alt="Forest background"
+          alt="Winter Casa Resort - Pristine forest wilderness in Kerala, Munnar"
           fill
           className="object-cover"
           sizes="100vw"
@@ -95,7 +95,7 @@ export default function About() {
               >
                 <Image
                   src={img}
-                  alt={`Gallery ${index + 1}`}
+                  alt={`Winter Casa Resort ${index === 0 ? 'luxury accommodation' : index === 1 ? 'forest cottage exterior' : 'nature retreat views'} - Premium resort in Chithirapuram, Kerala`}
                   fill
                   className="object-cover transition-transform duration-700"
                   sizes="(max-width: 768px) 50vw, 25vw"
