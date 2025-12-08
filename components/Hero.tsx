@@ -86,24 +86,38 @@ export default function Hero() {
     observer.observe(section)
 
     // Enable audio on first user interaction if autoplay was blocked
-    const enableAudioOnInteraction = () => {
-      if (audio.paused && section.getBoundingClientRect().top < window.innerHeight) {
-        playAudio()
+    // Mobile browsers require direct user interaction to play audio
+    const enableAudioOnInteraction = async () => {
+      if (audio.paused) {
+        // Check if hero section is visible
+        const rect = section.getBoundingClientRect()
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+        
+        if (isVisible) {
+          try {
+            await audio.play()
+            setIsPlaying(true)
+          } catch (error) {
+            console.log('Audio play failed:', error)
+          }
+        }
       }
-      // Remove listeners after first successful interaction
-      document.removeEventListener('click', enableAudioOnInteraction)
-      document.removeEventListener('scroll', enableAudioOnInteraction)
-      document.removeEventListener('touchstart', enableAudioOnInteraction)
-      document.removeEventListener('keydown', enableAudioOnInteraction)
     }
 
     // Add multiple interaction listeners to catch any user action
-    document.addEventListener('click', enableAudioOnInteraction, { once: true })
-    document.addEventListener('scroll', enableAudioOnInteraction, { once: true })
-    document.addEventListener('touchstart', enableAudioOnInteraction, { once: true })
-    document.addEventListener('keydown', enableAudioOnInteraction, { once: true })
+    // Use capture phase for better mobile support
+    const options = { once: true, passive: true }
+    document.addEventListener('click', enableAudioOnInteraction, options)
+    document.addEventListener('touchstart', enableAudioOnInteraction, options)
+    document.addEventListener('touchend', enableAudioOnInteraction, options)
+    document.addEventListener('scroll', enableAudioOnInteraction, options)
+    document.addEventListener('keydown', enableAudioOnInteraction, options)
+    
+    // Also listen on the section itself for direct interaction
+    section.addEventListener('touchstart', enableAudioOnInteraction, options)
+    section.addEventListener('click', enableAudioOnInteraction, options)
 
-    return () => {
+      return () => {
       clearTimeout(initialTimeout)
       observer.disconnect()
       audio.pause()
@@ -111,7 +125,10 @@ export default function Hero() {
       document.removeEventListener('click', enableAudioOnInteraction)
       document.removeEventListener('scroll', enableAudioOnInteraction)
       document.removeEventListener('touchstart', enableAudioOnInteraction)
+      document.removeEventListener('touchend', enableAudioOnInteraction)
       document.removeEventListener('keydown', enableAudioOnInteraction)
+      section.removeEventListener('touchstart', enableAudioOnInteraction)
+      section.removeEventListener('click', enableAudioOnInteraction)
     }
   }, [isMounted])
 
@@ -141,7 +158,7 @@ export default function Hero() {
           ref={audioRef}
           loop
           preload="auto"
-          crossOrigin="anonymous"
+          playsInline
         >
           <source src="/hero-music.mp3" type="audio/mpeg" />
           <source src="/hero-music.ogg" type="audio/ogg" />
