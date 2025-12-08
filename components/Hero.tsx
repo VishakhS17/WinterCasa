@@ -3,16 +3,117 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { getBranding } from '@/lib/theme'
 import Link from 'next/link'
+import { useState, useEffect, useRef } from 'react'
 
 export default function Hero() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   
   const springConfig = { damping: 25, stiffness: 200 }
   const x = useSpring(useTransform(mouseX, [-1, 1], [-20, 20]), springConfig)
   const y = useSpring(useTransform(mouseY, [-1, 1], [-20, 20]), springConfig)
 
   const branding = getBranding()
+
+  // Set mounted state on client side only
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  // Handle audio playback based on hero section visibility
+  useEffect(() => {
+    if (!isMounted) return
+
+    const audio = audioRef.current
+    const section = document.getElementById('home')
+    
+    if (!audio || !section) return
+
+    // Set audio volume (0.0 to 1.0)
+    audio.volume = 0.5
+
+    // Function to play/resume audio
+    const playAudio = async () => {
+      try {
+        await audio.play()
+        setIsPlaying(true)
+      } catch (error) {
+        // Autoplay was prevented - will be enabled on user interaction
+        setIsPlaying(false)
+      }
+    }
+
+    // Function to pause audio
+    const pauseAudio = () => {
+      audio.pause()
+      setIsPlaying(false)
+    }
+
+    // Try to play immediately when page loads
+    const tryInitialPlay = () => {
+      // Wait for audio to be ready
+      if (audio.readyState >= 2) { // HAVE_CURRENT_DATA or higher
+        playAudio()
+      } else {
+        // Wait for audio to load
+        audio.addEventListener('canplaythrough', playAudio, { once: true })
+      }
+    }
+
+    // Start playing immediately
+    const initialTimeout = setTimeout(tryInitialPlay, 200)
+
+    // Handle intersection changes (scroll in/out of hero section)
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          // Hero section is visible - resume/play audio
+          playAudio()
+        } else {
+          // Hero section is not visible - pause audio
+          pauseAudio()
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: [0, 0.3, 0.5], // Multiple thresholds for smoother transitions
+    })
+
+    observer.observe(section)
+
+    // Enable audio on first user interaction if autoplay was blocked
+    const enableAudioOnInteraction = () => {
+      if (audio.paused && section.getBoundingClientRect().top < window.innerHeight) {
+        playAudio()
+      }
+      // Remove listeners after first successful interaction
+      document.removeEventListener('click', enableAudioOnInteraction)
+      document.removeEventListener('scroll', enableAudioOnInteraction)
+      document.removeEventListener('touchstart', enableAudioOnInteraction)
+      document.removeEventListener('keydown', enableAudioOnInteraction)
+    }
+
+    // Add multiple interaction listeners to catch any user action
+    document.addEventListener('click', enableAudioOnInteraction, { once: true })
+    document.addEventListener('scroll', enableAudioOnInteraction, { once: true })
+    document.addEventListener('touchstart', enableAudioOnInteraction, { once: true })
+    document.addEventListener('keydown', enableAudioOnInteraction, { once: true })
+
+    return () => {
+      clearTimeout(initialTimeout)
+      observer.disconnect()
+      audio.pause()
+      audio.removeEventListener('canplaythrough', playAudio)
+      document.removeEventListener('click', enableAudioOnInteraction)
+      document.removeEventListener('scroll', enableAudioOnInteraction)
+      document.removeEventListener('touchstart', enableAudioOnInteraction)
+      document.removeEventListener('keydown', enableAudioOnInteraction)
+    }
+  }, [isMounted])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -34,6 +135,19 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Background audio - plays only when hero section is visible */}
+      {isMounted && (
+        <audio
+          ref={audioRef}
+          loop
+          preload="auto"
+          crossOrigin="anonymous"
+        >
+          <source src="/hero-music.mp3" type="audio/mpeg" />
+          <source src="/hero-music.ogg" type="audio/ogg" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
       {/* Video background */}
       <div className="absolute inset-0">
         <video
