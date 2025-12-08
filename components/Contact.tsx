@@ -9,8 +9,9 @@ export default function Contact() {
 
   const contactInfo = {
     address: 'Power House Road,Chithirapuram, Chithirapuram, Kerala 685565',
-    phonePrimary: '+91 9496101377',
-    phoneSecondary: '+91 8113057252',
+    phonePrimary: '+91 7902868450',
+    phoneSecondary: '+91 9496101377',
+    phoneTertiary: '+91 8113057252',
     instagramUrl: 'https://www.instagram.com/winter_casa/',
     mapUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4302.290346115264!2d77.0495117!3d10.0296132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07985c371978c9%3A0x9cbd5c488cc247e9!2sWinter%20Casa%20Resort%20and%20Cottages!5e1!3m2!1sen!2sin!4v1764669175330!5m2!1sen!2sin',
@@ -104,7 +105,7 @@ export default function Contact() {
                     </p>
                     <div className="space-y-1">
                       <a
-                        href={`tel:${contactInfo.phonePrimary}`}
+                        href={`tel:${contactInfo.phonePrimary.replace(/\s/g, '')}`}
                         className="block text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
                       >
                         {contactInfo.phonePrimary}
@@ -114,6 +115,12 @@ export default function Contact() {
                         className="block text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
                       >
                         {contactInfo.phoneSecondary}
+                      </a>
+                      <a
+                        href={`tel:${contactInfo.phoneTertiary}`}
+                        className="block text-lg md:text-xl text-forest/60 hover:text-gold transition-colors font-body"
+                      >
+                        {contactInfo.phoneTertiary}
                       </a>
                     </div>
                   </div>

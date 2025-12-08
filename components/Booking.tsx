@@ -57,8 +57,8 @@ Thank you!`
     // Encode the message for URL
     const encodedMessage = encodeURIComponent(message)
 
-    // WhatsApp number: +91 73060 79005 (remove + and spaces)
-    const whatsappNumber = '917306079005'
+    // WhatsApp number: +91 7902868450 (remove + and spaces)
+    const whatsappNumber = '917902868450'
 
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`

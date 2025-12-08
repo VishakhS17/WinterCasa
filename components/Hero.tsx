@@ -11,6 +11,7 @@ export default function Hero() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isMounted, setIsMounted] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const userInteractedRef = useRef(false)
   
   const springConfig = { damping: 25, stiffness: 200 }
   const x = useSpring(useTransform(mouseX, [-1, 1], [-20, 20]), springConfig)
@@ -41,7 +42,7 @@ export default function Hero() {
         await audio.play()
         setIsPlaying(true)
       } catch (error) {
-        // Autoplay was prevented - will be enabled on user interaction
+        // Play failed - likely autoplay blocked
         setIsPlaying(false)
       }
     }
@@ -52,14 +53,30 @@ export default function Hero() {
       setIsPlaying(false)
     }
 
-    // Try to play immediately when page loads
-    const tryInitialPlay = () => {
+    // Try to play immediately when page loads (works on desktop, fails on mobile)
+    const tryInitialPlay = async () => {
       // Wait for audio to be ready
       if (audio.readyState >= 2) { // HAVE_CURRENT_DATA or higher
-        playAudio()
+        try {
+          await audio.play()
+          setIsPlaying(true)
+          userInteractedRef.current = true // Mark as enabled if autoplay worked
+        } catch (error) {
+          // Autoplay blocked - will wait for user interaction
+          setIsPlaying(false)
+        }
       } else {
         // Wait for audio to load
-        audio.addEventListener('canplaythrough', playAudio, { once: true })
+        const playWhenReady = async () => {
+          try {
+            await audio.play()
+            setIsPlaying(true)
+            userInteractedRef.current = true
+          } catch (error) {
+            setIsPlaying(false)
+          }
+        }
+        audio.addEventListener('canplaythrough', playWhenReady, { once: true })
       }
     }
 
@@ -71,7 +88,10 @@ export default function Hero() {
       entries.forEach((entry) => {
         if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
           // Hero section is visible - resume/play audio
-          playAudio()
+          // Only play if user has interacted (required for mobile) or if already playing
+          if (userInteractedRef.current || !audio.paused) {
+            playAudio()
+          }
         } else {
           // Hero section is not visible - pause audio
           pauseAudio()
@@ -88,18 +108,19 @@ export default function Hero() {
     // Enable audio on first user interaction if autoplay was blocked
     // Mobile browsers require direct user interaction to play audio
     const enableAudioOnInteraction = async () => {
-      if (audio.paused) {
-        // Check if hero section is visible
-        const rect = section.getBoundingClientRect()
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0
-        
-        if (isVisible) {
-          try {
-            await audio.play()
-            setIsPlaying(true)
-          } catch (error) {
-            console.log('Audio play failed:', error)
-          }
+      // Mark that user has interacted
+      userInteractedRef.current = true
+      
+      // Check if hero section is visible
+      const rect = section.getBoundingClientRect()
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+      
+      if (isVisible && audio.paused) {
+        try {
+          await audio.play()
+          setIsPlaying(true)
+        } catch (error) {
+          console.log('Audio play failed:', error)
         }
       }
     }
