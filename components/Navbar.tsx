@@ -106,7 +106,7 @@ export default function Navbar() {
   )
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
+    { name: 'Home', href: '/' },
     { name: 'Cottages', href: '#cottages' },
     { name: 'Contact', href: '#contact' },
   ]
@@ -131,7 +131,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           <motion.div style={{ scale: logoSize }}>
             <Link
-              href="#home"
+              href="/"
               className="text-2xl md:text-3xl font-heading font-bold z-10 block text-transparent bg-clip-text bg-gradient-to-r from-[#8b6b2c] via-[#f5e3a1] to-[#d4af37]"
             >
               {branding.siteTitle}

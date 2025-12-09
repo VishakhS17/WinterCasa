@@ -17,7 +17,6 @@ export default function Booking() {
   })
 
   const roomTypes = [
-    'Classic Room',
     'Deluxe Room',
     'Private Cottage',
   ]
@@ -57,8 +56,8 @@ Thank you!`
     // Encode the message for URL
     const encodedMessage = encodeURIComponent(message)
 
-    // WhatsApp number: +91 7902868450 (remove + and spaces)
-    const whatsappNumber = '917902868450'
+    // WhatsApp number: +91 9496101377 (remove + and spaces)
+    const whatsappNumber = '919496101377'
 
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
@@ -87,8 +86,7 @@ Thank you!`
       <div className="relative z-10 max-w-[1300px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -103,8 +101,7 @@ Thank you!`
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-2xl mx-auto"
         >

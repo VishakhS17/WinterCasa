@@ -2,14 +2,14 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Cottages from '@/components/Cottages'
-import Features from '@/components/Features'
 import Testimonials from '@/components/Testimonials'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import WhatsAppButton from '@/components/WhatsAppButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Winter Casa Resort & Cottages | Luxury Forest Resort in Munnar, Kerala',
   description: 'Luxury forest resort in Kerala offering Classic Rooms, Deluxe Rooms, and Private Cottages. Experience nature\'s finest luxury accommodation in Chithirapuram, Munnar. Book your peaceful retreat today.',
   openGraph: {
     title: 'Winter Casa Resort & Cottages | Luxury Forest Resort in Kerala',
@@ -89,10 +89,10 @@ export default function Home() {
       <Hero />
       <About />
       <Cottages />
-      <Features />
-      <Contact />
       <Testimonials />
+      <Contact />
       <Footer />
+      <WhatsAppButton />
     </main>
     </>
   )
