@@ -53,8 +53,11 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    apple: '/icon.png',
   },
   manifest: '/site.webmanifest',
   openGraph: {
