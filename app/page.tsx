@@ -9,32 +9,35 @@ import WhatsAppButton from '@/components/WhatsAppButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Winter Casa Resort & Cottages | Luxury Forest Resort in Munnar, Kerala',
-  description: 'Luxury forest resort in Kerala offering Classic Rooms, Deluxe Rooms, and Private Cottages. Experience nature\'s finest luxury accommodation in Chithirapuram, Munnar. Book your peaceful retreat today.',
+  title: 'Best Resort in Munnar | Winter Casa Resort & Cottages | Luxury Forest Resort',
+  description: 'Winter Casa - The best resort in Munnar, Kerala. Luxury forest resort offering Deluxe Rooms and Private Cottages in Chithirapuram. Experience nature\'s finest luxury accommodation. Book your peaceful retreat today.',
   openGraph: {
-    title: 'Winter Casa Resort & Cottages | Luxury Forest Resort in Kerala',
-    description: 'Experience nature\'s finest luxury accommodation in Chithirapuram, Munnar. Book your peaceful retreat today.',
+    title: 'Best Resort in Munnar | Winter Casa Resort & Cottages | Luxury Forest Resort',
+    description: 'Winter Casa - Premium resort in Munnar, Kerala. Experience nature\'s finest luxury accommodation in Chithirapuram. Book your peaceful retreat today.',
   },
 }
 
 // Structured Data for SEO
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com'
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Resort',
+  '@id': `${siteUrl}#resort`,
   name: 'Winter Casa Resort & Cottages',
   alternateName: 'Winter Casa',
-  description: 'Luxury forest resort in Kerala offering Classic Rooms, Deluxe Rooms, and Private Cottages',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com',
-  logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com'}/favicon.png`,
+  description: 'The best luxury resort in Munnar, Kerala. Offering Deluxe Rooms and Private Cottages in the heart of pristine forest wilderness.',
+  url: siteUrl,
+  logo: `${siteUrl}/favicon.png`,
   image: [
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com'}/Classic1.jpg`,
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com'}/Deluxe1.jpg`,
-    `${process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com'}/PrivateCottage.jpg`,
+    `${siteUrl}/Classic1.jpg`,
+    `${siteUrl}/Deluxe1.jpg`,
+    `${siteUrl}/PrivateCottage.jpg`,
   ],
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Power House Road, Chithirapuram',
-    addressLocality: 'Chithirapuram',
+    addressLocality: 'Munnar',
     addressRegion: 'Kerala',
     postalCode: '685565',
     addressCountry: 'IN',
@@ -62,6 +65,16 @@ const structuredData = {
       name: 'Complimentary Coffee & Tea',
       value: true,
     },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Forest Location',
+      value: true,
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Luxury Accommodation',
+      value: true,
+    },
   ],
   starRating: {
     '@type': 'Rating',
@@ -75,6 +88,81 @@ const structuredData = {
   sameAs: [
     'https://www.instagram.com/winter_casa/',
   ],
+  keywords: 'resort in Munnar, best resort in Munnar, Munnar resort, luxury resort Munnar, resort Munnar Kerala',
+  areaServed: {
+    '@type': 'City',
+    name: 'Munnar',
+  },
+}
+
+// LocalBusiness Schema for better local SEO
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${siteUrl}#localbusiness`,
+  name: 'Winter Casa Resort & Cottages',
+  image: `${siteUrl}/favicon.png`,
+  url: siteUrl,
+  telephone: '+917902868450',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Power House Road, Chithirapuram',
+    addressLocality: 'Munnar',
+    addressRegion: 'Kerala',
+    postalCode: '685565',
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '10.0296132',
+    longitude: '77.0495117',
+  },
+  priceRange: '$$',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '50',
+  },
+}
+
+// FAQ Schema for common questions
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the best resort in Munnar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Winter Casa Resort & Cottages is the best luxury resort in Munnar, Kerala. Located in Chithirapuram, we offer Deluxe Rooms and Private Cottages surrounded by pristine forest wilderness.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Where to stay in Munnar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Winter Casa Resort & Cottages offers premium accommodation in Munnar with luxury forest cottages and rooms. Our resort is located in Chithirapuram, providing an ideal base for exploring Munnar\'s natural beauty.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What types of rooms are available at Winter Casa Resort?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Winter Casa Resort offers two types of accommodation: Deluxe Rooms and Private Cottages. All rooms are designed to blend luxury with nature, providing stunning forest views and premium amenities.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How to book a resort in Munnar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can book your stay at Winter Casa Resort & Cottages directly through our website. We offer easy online booking for Deluxe Rooms and Private Cottages. Contact us at +917902868450 for assistance.',
+      },
+    },
+  ],
 }
 
 export default function Home() {
@@ -83,6 +171,14 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <main className="min-h-screen overflow-x-hidden w-full">
       <Navbar />

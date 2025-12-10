@@ -10,6 +10,7 @@ export default function About() {
   const aboutContent = {
     title: 'A Sanctuary in the Forest',
     content: `Nestled in the heart of pristine wilderness, Winter Casa offers an escape to tranquility. Our luxury cottages blend seamlessly with nature, providing an unparalleled experience where forest whispers meet refined comfort. Every detail is crafted to immerse you in the serenity of the woods while indulging in premium amenities.`,
+    seoContent: `Winter Casa Resort & Cottages stands as the best resort in Munnar, Kerala. Located in the scenic Chithirapuram area, our luxury resort in Munnar offers an exceptional experience for travelers seeking the finest accommodation. As the top resort in Munnar, we provide Deluxe Rooms and Private Cottages that combine luxury with nature. When searching for the best resort in Munnar, Winter Casa offers unmatched forest views, premium amenities, and a peaceful retreat away from the hustle of city life. Book your stay at Munnar's most sought-after luxury resort today.`,
   }
 
   const imageGrid = ['/IMG20251114132916.jpg', '/img2.jpg', '/img4.jpg'].filter(Boolean)
@@ -69,6 +70,22 @@ export default function About() {
             >
               {aboutContent.content}
             </motion.p>
+
+            {/* SEO-optimized content section */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-8 p-6 bg-white/10 backdrop-blur-sm rounded-lg border border-gold/20"
+            >
+              <h3 className="text-2xl md:text-3xl font-heading font-semibold text-gold mb-4">
+                Best Resort in Munnar
+              </h3>
+              <p className="text-lg md:text-xl text-white/90 leading-relaxed font-body">
+                {aboutContent.seoContent}
+              </p>
+            </motion.div>
           </div>
 
           {/* Right: Image collage */}

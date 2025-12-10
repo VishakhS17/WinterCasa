@@ -14,26 +14,34 @@ const branding = getBranding()
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wintercasa.com'
 const siteName = 'Winter Casa Resort & Cottages'
-const siteDescription = 'Luxury forest resort in Kerala offering Classic Rooms, Deluxe Rooms, and Private Cottages. Experience nature\'s finest luxury accommodation in Chithirapuram, Munnar. Book your peaceful retreat today.'
+const siteDescription = 'Winter Casa - The best resort in Munnar, Kerala. Luxury forest resort offering Deluxe Rooms and Private Cottages in Chithirapuram. Experience nature\'s finest luxury accommodation. Book your peaceful retreat today.'
 const keywords = [
+  'resorts in Munnar',
+  'best resort in Munnar',
+  'Munnar resorts',
+  'luxury resorts Munnar',
+  'resorts Munnar Kerala',
+  'top resorts in Munnar',
+  'Munnar resort booking',
   'Winter Casa',
   'resort Kerala',
   'Munnar resort',
   'luxury resort Kerala',
-  'forest resort',
+  'forest resort Munnar',
   'cottages Kerala',
   'Chithirapuram resort',
-  'nature resort',
+  'nature resort Munnar',
   'luxury accommodation Kerala',
-  'eco resort',
-  'mountain resort',
-  'peaceful retreat',
-  'Classic Room',
-  'Deluxe Room',
-  'Private Cottage',
-  'resort booking',
+  'eco resort Munnar',
+  'mountain resort Kerala',
+  'peaceful retreat Munnar',
+  'Deluxe Room Munnar',
+  'Private Cottage Munnar',
+  'resort booking Munnar',
   'Kerala tourism',
   'Munnar accommodation',
+  'Munnar hotels',
+  'resorts near Munnar',
 ]
 
 export const metadata: Metadata = {
@@ -72,7 +80,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/Classic1.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Winter Casa Resort - Classic Room',
+        alt: 'Winter Casa Resort - Deluxe Room',
       },
       {
         url: `${siteUrl}/Deluxe1.jpg`,
