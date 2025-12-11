@@ -1,7 +1,8 @@
-import Navbar from '@/components/Navbar'
+ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Cottages from '@/components/Cottages'
+import FeaturesAndAmenities from '@/components/FeaturesAndAmenities'
 import Testimonials from '@/components/Testimonials'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
@@ -185,6 +186,7 @@ export default function Home() {
       <Hero />
       <About />
       <Cottages />
+      <FeaturesAndAmenities />
       <Testimonials />
       <Contact />
       <Footer />
