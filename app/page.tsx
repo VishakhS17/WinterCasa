@@ -37,7 +37,7 @@ const structuredData = {
   ],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Power House Road, Chithirapuram',
+    streetAddress: 'Power House Road, Chithirapuram, Anachal',
     addressLocality: 'Munnar',
     addressRegion: 'Kerala',
     postalCode: '685565',
@@ -107,7 +107,7 @@ const localBusinessSchema = {
   telephone: '+917902868450',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Power House Road, Chithirapuram',
+    streetAddress: 'Power House Road, Chithirapuram, Anachal',
     addressLocality: 'Munnar',
     addressRegion: 'Kerala',
     postalCode: '685565',

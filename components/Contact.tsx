@@ -8,7 +8,7 @@ export default function Contact() {
   const assets = getAssets()
 
   const contactInfo = {
-    address: 'Power House Road,Chithirapuram, Chithirapuram, Kerala 685565',
+    address: 'Power House Road, Chithirapuram, Anachal, Kerala 685565',
     phonePrimary: '+91 9496101377',
     phoneSecondary: '+91 8113057252',
     phoneTertiary: '+91 7902868450',
