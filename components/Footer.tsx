@@ -37,8 +37,16 @@ export default function Footer() {
           className="pt-8 border-t border-white/10 text-center"
         >
           <p className="text-lg text-white/50 font-body">
-            © {new Date().getFullYear()} {branding.siteTitle}. All rights
-            reserved.
+            © 2026 {branding.siteTitle}. All rights reserved. Designed by{' '}
+            <a
+              href="https://www.linkedin.com/in/vishakhs17/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold hover:text-gold/80 transition-colors underline"
+            >
+              Vishakh S
+            </a>
+            .
           </p>
         </motion.div>
       </div>
