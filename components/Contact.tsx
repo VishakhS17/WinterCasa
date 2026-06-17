@@ -13,6 +13,7 @@ export default function Contact() {
     phoneSecondary: '+91 8113057252',
     phoneTertiary: '+91 7902868450',
     phoneQuaternary: '+91 8111939953',
+    whatsappNumber: '+91 8113057252',
     instagramUrl: 'https://www.instagram.com/winter_casa/',
     mapUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4302.290346115264!2d77.0495117!3d10.0296132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b07985c371978c9%3A0x9cbd5c488cc247e9!2sWinter%20Casa%20Resort%20and%20Cottages!5e1!3m2!1sen!2sin!4v1764669175330!5m2!1sen!2sin',
@@ -129,7 +130,7 @@ export default function Contact() {
                         {contactInfo.phonePrimary}
                       </a>
                       <a
-                          href={getWhatsAppUrl(contactInfo.phonePrimary)}
+                          href={getWhatsAppUrl(contactInfo.whatsappNumber)}
                           target="_blank"
                           rel="noreferrer"
                           className="text-gold hover:text-gold/80 transition-colors"
@@ -152,7 +153,7 @@ export default function Contact() {
                         {contactInfo.phoneSecondary}
                       </a>
                         <a
-                          href={getWhatsAppUrl(contactInfo.phoneSecondary)}
+                          href={getWhatsAppUrl(contactInfo.whatsappNumber)}
                           target="_blank"
                           rel="noreferrer"
                           className="text-gold hover:text-gold/80 transition-colors"
@@ -175,7 +176,7 @@ export default function Contact() {
                           {contactInfo.phoneTertiary}
                         </a>
                         <a
-                          href={getWhatsAppUrl(contactInfo.phoneTertiary)}
+                          href={getWhatsAppUrl(contactInfo.whatsappNumber)}
                           target="_blank"
                           rel="noreferrer"
                           className="text-gold hover:text-gold/80 transition-colors"
@@ -198,7 +199,7 @@ export default function Contact() {
                           {contactInfo.phoneQuaternary}
                         </a>
                         <a
-                          href={getWhatsAppUrl(contactInfo.phoneQuaternary)}
+                          href={getWhatsAppUrl(contactInfo.whatsappNumber)}
                           target="_blank"
                           rel="noreferrer"
                           className="text-gold hover:text-gold/80 transition-colors"

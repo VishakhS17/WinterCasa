@@ -7,7 +7,7 @@ interface WhatsAppButtonProps {
 }
 
 export default function WhatsAppButton({
-  phone = '+919496101377',
+  phone = '+918113057252',
   message = 'Hi, I would like to enquire about booking at Winter Casa Resort.',
   className = '',
 }: WhatsAppButtonProps) {
